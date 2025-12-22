@@ -9,35 +9,37 @@
         :root { --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 10px; }
         
-        h1 { font-size: 1.5rem; margin: 10px 0 5px 0; color: var(--accent); }
-        .status-bar { font-size: 0.8rem; margin-bottom: 15px; }
+        h1 { font-size: 1.6rem; margin: 15px 0 5px 0; color: var(--accent); }
+        .status-bar { font-size: 0.8rem; margin-bottom: 20px; }
         
-        .grid { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; max-width: 350px; }
+        /* Aranjare verticala compacta */
+        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; max-width: 360px; }
         
         .socket-card { 
             background: var(--card); 
-            padding: 15px; 
-            border-radius: 20px; 
+            padding: 18px; 
+            border-radius: 24px; 
             text-align: center; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
             border: 1px solid #334155; 
             display: flex;
-            flex-direction: row; /* Aliniere pe orizontala in interiorul cardului pentru a salva spatiu vertical */
+            flex-direction: column;
             align-items: center;
-            justify-content: space-around;
         }
         
+        /* Buton "In Between" - nici prea mare, nici prea mic */
         .btn { 
-            width: 70px; 
-            height: 70px; 
+            width: 95px; 
+            height: 95px; 
             border-radius: 50%; 
             border: none; 
             cursor: pointer; 
             background: #334155; 
             color: white; 
-            font-size: 28px; 
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: 0 4px 0 #0f172a; 
+            font-size: 34px; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            position: relative; 
+            box-shadow: 0 5px 0 #0f172a; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -45,13 +47,14 @@
         
         .btn.active { 
             background: #22c55e; 
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); 
-            transform: scale(1.05); 
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4); 
+            transform: translateY(-3px); 
         }
         
-        .info-zone { text-align: left; flex-grow: 1; margin-left: 20px; }
-        .label { font-weight: 700; font-size: 1.1rem; display: block; }
-        .state-text { font-size: 0.9rem; font-weight: bold; opacity: 0.8; }
+        .btn:active { transform: translateY(2px); box-shadow: none; }
+        
+        .label { margin-top: 10px; font-weight: 700; font-size: 1.1rem; display: block; }
+        .state-text { font-size: 0.85rem; font-weight: bold; opacity: 0.7; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -61,26 +64,20 @@
     <div class="grid">
         <div class="socket-card">
             <button id="btn1" class="btn" onclick="toggle(1)">🔌</button>
-            <div class="info-zone">
-                <span class="label">Socket 1</span>
-                <span id="state1" class="state-text" style="color:#94a3b8">OFF</span>
-            </div>
+            <span class="label">Socket 1</span>
+            <span id="state1" class="state-text">OFF</span>
         </div>
         
         <div class="socket-card">
             <button id="btn2" class="btn" onclick="toggle(2)">🔌</button>
-            <div class="info-zone">
-                <span class="label">Socket 2</span>
-                <span id="state2" class="state-text" style="color:#94a3b8">OFF</span>
-            </div>
+            <span class="label">Socket 2</span>
+            <span id="state2" class="state-text">OFF</span>
         </div>
         
         <div class="socket-card">
             <button id="btn3" class="btn" onclick="toggle(3)">🔌</button>
-            <div class="info-zone">
-                <span class="label">Socket 3</span>
-                <span id="state3" class="state-text" style="color:#94a3b8">OFF</span>
-            </div>
+            <span class="label">Socket 3</span>
+            <span id="state3" class="state-text">OFF</span>
         </div>
     </div>
 
@@ -115,7 +112,7 @@
             } else {
                 btn.classList.remove('active');
                 text.innerText = "OFF";
-                text.style.color = "#94a3b8";
+                text.style.color = "white";
             }
         }
     </script>
