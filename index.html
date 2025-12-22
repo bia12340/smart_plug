@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Power Outlet</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; padding: 20px; background: #121212; color: #e0e0e0; }
+        .container { max-width: 400px; margin: auto; }
+        .card { background: #1e1e1e; padding: 20px; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid #333; }
+        h1 { color: #00d4ff; }
+        button { width: 100px; height: 45px; font-size: 16px; margin: 5px; cursor: pointer; border-radius: 8px; border: none; font-weight: bold; transition: 0.2s; }
+        .on { background: #2ecc71; color: white; }
+        .on:active { background: #27ae60; transform: scale(0.95); }
+        .off { background: #e74c3c; color: white; }
+        .off:active { background: #c0392b; transform: scale(0.95); }
+        #status { font-weight: bold; margin-bottom: 20px; color: #f1c40f; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Outlet</h1>
+        <div id="status">Connecting to server...</div>
+
+        <div class="card">
+            <h3>Socket 1 (D25)</h3>
+            <button class="on" onclick="send('1_ON')">ON</button>
+            <button class="off" onclick="send('1_OFF')">OFF</button>
+        </div>
+
+        <div class="card">
+            <h3>Socket 2 (D33)</h3>
+            <button class="on" onclick="send('2_ON')">ON</button>
+            <button class="off" onclick="send('2_OFF')">OFF</button>
+        </div>
+
+        <div class="card">
+            <h3>Socket 3 (D14)</h3>
+            <button class="on" onclick="send('3_ON')">ON</button>
+            <button class="off" onclick="send('3_OFF')">OFF</button>
+        </div>
+    </div>
+
+    <script>
+        // Conexiune la broker-ul public HiveMQ
+        const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt');
+
+        client.on('connect', () => {
+            document.getElementById('status').innerText = "Status: Online ✅";
+            document.getElementById('status').style.color = "#2ecc71";
+        });
+
+        client.on('error', () => {
+            document.getElementById('status').innerText = "Status: Connection Error ❌";
+            document.getElementById('status').style.color = "#e74c3c";
+        });
+
+        function send(command) {
+            // Trimitem comanda pe acelasi 'topic' pe care il va asculta si ESP32
+            client.publish('casa/priza/comenzi', command);
+            console.log("Sent: " + command);
+        }
+    </script>
+</body>
+</html>
