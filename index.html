@@ -7,39 +7,37 @@
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <style>
         :root { --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 10px; }
         
-        h1 { font-size: 1.8rem; margin-bottom: 5px; color: var(--accent); }
-        .status-bar { font-size: 0.9rem; margin-bottom: 30px; transition: 0.3s; }
+        h1 { font-size: 1.5rem; margin: 10px 0 5px 0; color: var(--accent); }
+        .status-bar { font-size: 0.8rem; margin-bottom: 15px; }
         
-        /* Aranjare verticala: 1 coloana */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%; max-width: 400px; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; max-width: 350px; }
         
         .socket-card { 
             background: var(--card); 
-            padding: 30px; 
-            border-radius: 24px; 
+            padding: 15px; 
+            border-radius: 20px; 
             text-align: center; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
             border: 1px solid #334155; 
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* Aliniere pe orizontala in interiorul cardului pentru a salva spatiu vertical */
             align-items: center;
+            justify-content: space-around;
         }
         
-        /* Butonul mult mai mare */
         .btn { 
-            width: 120px; 
-            height: 120px; 
+            width: 70px; 
+            height: 70px; 
             border-radius: 50%; 
             border: none; 
             cursor: pointer; 
             background: #334155; 
             color: white; 
-            font-size: 40px; /* Iconita mai mare */
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            position: relative; 
-            box-shadow: 0 6px 0 #0f172a; 
+            font-size: 28px; 
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 4px 0 #0f172a; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,14 +45,13 @@
         
         .btn.active { 
             background: #22c55e; 
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4); 
-            transform: translateY(-4px); 
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); 
+            transform: scale(1.05); 
         }
         
-        .btn:active { transform: translateY(2px); box-shadow: none; }
-        
-        .label { margin-top: 15px; font-weight: 700; font-size: 1.3rem; display: block; }
-        .state-text { font-size: 1rem; font-weight: bold; opacity: 0.8; display: block; margin-top: 5px; }
+        .info-zone { text-align: left; flex-grow: 1; margin-left: 20px; }
+        .label { font-weight: 700; font-size: 1.1rem; display: block; }
+        .state-text { font-size: 0.9rem; font-weight: bold; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -64,20 +61,26 @@
     <div class="grid">
         <div class="socket-card">
             <button id="btn1" class="btn" onclick="toggle(1)">🔌</button>
-            <span class="label">Socket 1</span>
-            <span id="state1" class="state-text">OFF</span>
+            <div class="info-zone">
+                <span class="label">Socket 1</span>
+                <span id="state1" class="state-text" style="color:#94a3b8">OFF</span>
+            </div>
         </div>
         
         <div class="socket-card">
             <button id="btn2" class="btn" onclick="toggle(2)">🔌</button>
-            <span class="label">Socket 2</span>
-            <span id="state2" class="state-text">OFF</span>
+            <div class="info-zone">
+                <span class="label">Socket 2</span>
+                <span id="state2" class="state-text" style="color:#94a3b8">OFF</span>
+            </div>
         </div>
         
         <div class="socket-card">
             <button id="btn3" class="btn" onclick="toggle(3)">🔌</button>
-            <span class="label">Socket 3</span>
-            <span id="state3" class="state-text">OFF</span>
+            <div class="info-zone">
+                <span class="label">Socket 3</span>
+                <span id="state3" class="state-text" style="color:#94a3b8">OFF</span>
+            </div>
         </div>
     </div>
 
@@ -87,7 +90,7 @@
         const topicStatus = 'casa/priza/status';
 
         client.on('connect', () => {
-            document.getElementById('status').innerText = "System Online ✅";
+            document.getElementById('status').innerText = "Online ✅";
             document.getElementById('status').style.color = "#22c55e";
             client.subscribe(topicStatus);
         });
@@ -112,7 +115,7 @@
             } else {
                 btn.classList.remove('active');
                 text.innerText = "OFF";
-                text.style.color = "white";
+                text.style.color = "#94a3b8";
             }
         }
     </script>
