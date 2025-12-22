@@ -9,34 +9,33 @@
         :root { --bg: #0f172a; --card: #1e293b; --accent: #38bdf8; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 10px; }
         
-        h1 { font-size: 1.6rem; margin: 15px 0 5px 0; color: var(--accent); }
-        .status-bar { font-size: 0.8rem; margin-bottom: 20px; }
+        h1 { font-size: 1.7rem; margin: 12px 0 5px 0; color: var(--accent); }
+        .status-bar { font-size: 0.85rem; margin-bottom: 18px; }
         
-        /* Aranjare verticala compacta */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; max-width: 360px; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 14px; width: 100%; max-width: 370px; }
         
         .socket-card { 
             background: var(--card); 
-            padding: 18px; 
-            border-radius: 24px; 
+            padding: 22px; 
+            border-radius: 26px; 
             text-align: center; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
+            box-shadow: 0 8px 22px rgba(0,0,0,0.25); 
             border: 1px solid #334155; 
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         
-        /* Buton "In Between" - nici prea mare, nici prea mic */
+        /* Butonul "O idee mai mare" - 105px */
         .btn { 
-            width: 95px; 
-            height: 95px; 
+            width: 105px; 
+            height: 105px; 
             border-radius: 50%; 
             border: none; 
             cursor: pointer; 
             background: #334155; 
             color: white; 
-            font-size: 34px; 
+            font-size: 38px; 
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             position: relative; 
             box-shadow: 0 5px 0 #0f172a; 
@@ -47,14 +46,14 @@
         
         .btn.active { 
             background: #22c55e; 
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4); 
+            box-shadow: 0 0 28px rgba(34, 197, 94, 0.45); 
             transform: translateY(-3px); 
         }
         
         .btn:active { transform: translateY(2px); box-shadow: none; }
         
-        .label { margin-top: 10px; font-weight: 700; font-size: 1.1rem; display: block; }
-        .state-text { font-size: 0.85rem; font-weight: bold; opacity: 0.7; display: block; margin-top: 2px; }
+        .label { margin-top: 12px; font-weight: 700; font-size: 1.2rem; display: block; }
+        .state-text { font-size: 0.9rem; font-weight: bold; opacity: 0.75; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
