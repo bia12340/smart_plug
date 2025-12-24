@@ -86,7 +86,7 @@
         const topicStatus = 'casa/priza/status';
 
         client.on('connect', () => {
-            document.getElementById('status').innerText = "Online ✅";
+            document.getElementById('status').innerText = "Online";
             document.getElementById('status').style.color = "#22c55e";
             client.subscribe(topicStatus);
         });
@@ -117,3 +117,4 @@
     </script>
 </body>
 </html>
+
