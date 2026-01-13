@@ -109,7 +109,7 @@
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            const parolaCriptata = "97793d406a1470769399435b53e895476a8165b45f448e89569769850119e7e7";
+            const parolaCriptata = "3f21e50243a4f1b966e1acf9b60fd0dad7def7c4c5593385e1fca6f3099a4261";
 
             if(hashHex === parolaCriptata) { 
                 localStorage.setItem("isLoggedIn", "true");
@@ -161,6 +161,7 @@
     </script>
 </body>
 </html>
+
 
 
 
